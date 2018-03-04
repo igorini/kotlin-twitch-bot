@@ -1,6 +1,7 @@
 buildscript {
     ext {
         kotlinVersion = '1.2.30'
+        koin_version = '0.9.0'
         jaxbVersion = '2.2.8'
         jacksonVersion = '2.9.4.1'
         kotlinLoggingVersion = '1.5.3'
@@ -27,6 +28,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
+    jcenter()
     mavenCentral()
     flatDir {
         dirs 'libs'
@@ -42,4 +44,6 @@ dependencies {
     compile name: 'twitch-irc-1.2'
 
     compile("io.github.microutils:kotlin-logging:${kotlinLoggingVersion}")
+
+    compile("org.koin:koin-core:${koin_version}")
 }

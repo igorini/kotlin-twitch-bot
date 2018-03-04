@@ -2,8 +2,7 @@ buildscript {
     ext {
         kotlinVersion = '1.2.30'
         koin_version = '0.9.0'
-        jaxbVersion = '2.2.8'
-        jacksonVersion = '2.9.4.1'
+        exposed_version = '0.10.1'
         kotlinLoggingVersion = '1.5.3'
     }
     repositories {
@@ -30,20 +29,28 @@ targetCompatibility = 1.8
 repositories {
     jcenter()
     mavenCentral()
+    maven {
+        url  "https://dl.bintray.com/kotlin/exposed"
+    }
     flatDir {
         dirs 'libs'
     }
 }
 
 dependencies {
-    compile("com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonVersion}")
+    // Kotlin
     compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
     compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
 
-    compile("javax.xml.bind:jaxb-api:${jaxbVersion}")
+    // Twitch IRC
     compile name: 'twitch-irc-1.2'
 
+    // Kotlin Logging
     compile("io.github.microutils:kotlin-logging:${kotlinLoggingVersion}")
 
+    // Koin
     compile("org.koin:koin-core:${koin_version}")
+
+    // Exposed
+    compile("org.jetbrains.exposed:exposed:${exposed_version}")
 }

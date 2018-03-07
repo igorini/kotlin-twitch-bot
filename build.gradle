@@ -19,8 +19,6 @@ plugins {
     id "org.jetbrains.kotlin.jvm" version "1.2.30"
 }
 
-mainClassName = 'com.igorini.koltintwitchbot.Application'
-
 group = 'com.igorini'
 version = '0.0.1'
 sourceCompatibility = 1.8

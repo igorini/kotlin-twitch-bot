@@ -9,5 +9,10 @@
 *.iml
 *.ipr
 
-### Spring ###
-application.properties
+### Config ###
+**/config.yaml
+
+### Output ###
+client.log
+config/
+out/

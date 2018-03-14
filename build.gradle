@@ -2,7 +2,6 @@ buildscript {
     ext {
         kotlinVersion = '1.2.30'
         koinVersion = '0.9.0'
-        exposedVersion = '0.10.1'
         kotlinLoggingVersion = '1.5.3'
         twitch4jVersion = 'v0.10.1'
         jacksonVersion = '2.9.4.1'
@@ -27,9 +26,6 @@ targetCompatibility = 1.8
 repositories {
     jcenter()
     mavenCentral()
-    maven {
-        url  "https://dl.bintray.com/kotlin/exposed"
-    }
 }
 
 publishing {
@@ -37,7 +33,7 @@ publishing {
         maven(MavenPublication) {
             groupId 'com.igorini'
             artifactId 'kotlin-twitch-bot'
-            version '0.0.1'
+            version '0.0.2'
             from components.java
         }
     }
@@ -53,9 +49,6 @@ dependencies {
 
     // Koin
     compile("org.koin:koin-core:${koinVersion}")
-
-    // Exposed
-    compile("org.jetbrains.exposed:exposed:${exposedVersion}")
 
     // Twitch4j
     compile("com.github.twitch4j:twitch4j:${twitch4jVersion}")

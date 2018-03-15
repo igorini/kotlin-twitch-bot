@@ -5,7 +5,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import mu.KotlinLogging
 import com.fasterxml.jackson.module.kotlin.*
 import me.philippheuer.twitch4j.TwitchClientBuilder
-import me.philippheuer.twitch4j.events.event.irc.ChannelMessageEvent
+import me.philippheuer.twitch4j.message.commands.Command
 import java.io.File
 
 /** Represents a Twitch Bot */
@@ -25,14 +25,18 @@ open class TwitchBot {
 
     init {
         // Register class to receive events with @EventSubscriber
-        twitchClient.dispatcher.registerListener(this)
+        registerListener(this)
     }
 
-    open fun start() {
+    fun start() {
         configuration.channels.forEach {
             val channelId = twitchClient.userEndpoint.getUserIdByUserName(it).get()
             val channelEndpoint = twitchClient.getChannelEndpoint(channelId)
             channelEndpoint.registerEventListener()
         }
     }
+
+    fun registerCommand(command: Command) = twitchClient.commandHandler.registerCommand(command)
+
+    fun registerListener(any: Any) = twitchClient.dispatcher.registerListener(any)
 }

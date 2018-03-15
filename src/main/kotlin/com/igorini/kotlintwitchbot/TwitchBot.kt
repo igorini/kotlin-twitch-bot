@@ -35,10 +35,4 @@ open class TwitchBot {
             channelEndpoint.registerEventListener()
         }
     }
-
-    open fun viewers(messageEvent: ChannelMessageEvent) = twitchClient.tmiEndpoint.getChatters(messageEvent.channel.name).viewers
-
-    open fun randomViewerExcept(messageEvent: ChannelMessageEvent, users: List<String>) = viewers(messageEvent).map { it.toLowerCase() }.minus(users).shuffled().firstOrNull()
-
-    open fun viewerOnlineExcept(messageEvent: ChannelMessageEvent, viewer: String, users: List<String>) = viewers(messageEvent).map { it.toLowerCase() }.minus(users).contains(viewer)
 }

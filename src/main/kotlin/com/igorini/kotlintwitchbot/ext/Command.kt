@@ -9,7 +9,7 @@ import me.philippheuer.twitch4j.message.commands.Command
 fun Command.viewers(messageEvent: ChannelMessageEvent) = twitchClient.tmiEndpoint.getChatters(messageEvent.channel.name).viewers
 
 /** @return A random viewer that is online in this channel, except provided users. */
-fun Command.randomViewerExcept(messageEvent: ChannelMessageEvent, users: List<String>) = viewers(messageEvent).map { it.toLowerCase() }.minus(users).shuffled().first()
+fun Command.randomViewerExcept(messageEvent: ChannelMessageEvent, users: List<String>) = viewers(messageEvent).map { it.toLowerCase() }.minus(users).shuffled().firstOrNull()
 
 /** Checks if provided viewer is online, except provided users. */
 fun Command.viewerOnlineExcept(messageEvent: ChannelMessageEvent, viewer: String, users: List<String>) = viewers(messageEvent).map { it.toLowerCase() }.minus(users).contains(viewer)

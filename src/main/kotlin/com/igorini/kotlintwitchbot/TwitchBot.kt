@@ -5,10 +5,13 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import mu.KotlinLogging
 import com.fasterxml.jackson.module.kotlin.*
 import me.philippheuer.twitch4j.TwitchClientBuilder
+import me.philippheuer.twitch4j.events.event.irc.ChannelMessageEvent
 import java.io.File
 
 /** Represents a Twitch Bot */
 open class TwitchBot {
+
+    open val logger = KotlinLogging.logger {}
 
     val configuration: Configuration = ObjectMapper(YAMLFactory()).registerKotlinModule().readValue(File(ClassLoader.getSystemResource("config.yaml").file))
 
@@ -25,9 +28,7 @@ open class TwitchBot {
         twitchClient.dispatcher.registerListener(this)
     }
 
-    open val logger = KotlinLogging.logger {}
-
-    fun start() {
+    open fun start() {
         configuration.channels.forEach {
             val channelId = twitchClient.userEndpoint.getUserIdByUserName(it).get()
             val channelEndpoint = twitchClient.getChannelEndpoint(channelId)
@@ -35,4 +36,9 @@ open class TwitchBot {
         }
     }
 
+    open fun viewers(messageEvent: ChannelMessageEvent) = twitchClient.tmiEndpoint.getChatters(messageEvent.channel.name).viewers
+
+    open fun randomViewerExcept(messageEvent: ChannelMessageEvent, users: List<String>) = viewers(messageEvent).map { it.toLowerCase() }.minus(users).shuffled().firstOrNull()
+
+    open fun viewerOnlineExcept(messageEvent: ChannelMessageEvent, viewer: String, users: List<String>) = viewers(messageEvent).map { it.toLowerCase() }.minus(users).contains(viewer)
 }

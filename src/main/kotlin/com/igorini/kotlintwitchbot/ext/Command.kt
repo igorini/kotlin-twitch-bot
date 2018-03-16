@@ -6,7 +6,10 @@ import me.philippheuer.twitch4j.message.commands.Command
 /* Contains extension functions and properties for [Command] */
 
 /** @return Viewers that are online in this channel. */
-fun Command.viewers(messageEvent: ChannelMessageEvent) = twitchClient.tmiEndpoint.getChatters(messageEvent.channel.name).viewers
+fun Command.viewers(messageEvent: ChannelMessageEvent): List<String> {
+    val chatter = twitchClient.tmiEndpoint.getChatters(messageEvent.channel.name)
+    return chatter.viewers + chatter.admins + chatter.globalMods + chatter.moderators + chatter.staff
+}
 
 /** @return A random viewer that is online in this channel, except provided users. */
 fun Command.randomViewerExcept(messageEvent: ChannelMessageEvent, users: List<String>) = viewers(messageEvent).map { it.toLowerCase() }.minus(users).shuffled().firstOrNull()

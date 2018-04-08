@@ -5,6 +5,7 @@ buildscript {
         kotlinLoggingVersion = '1.5.3'
         twitch4jVersion = 'v0.10.1'
         jacksonVersion = '2.9.4.1'
+        caffeineVersion = '2.6.2'
     }
     repositories {
         mavenCentral()
@@ -55,4 +56,7 @@ dependencies {
 
     // Jackson
     compile("com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonVersion}")
+
+    // Caffeine (caching library)
+    compile("com.github.ben-manes.caffeine:caffeine${caffeineVersion}")
 }

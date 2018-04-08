@@ -58,5 +58,5 @@ dependencies {
     compile("com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonVersion}")
 
     // Caffeine (caching library)
-    compile("com.github.ben-manes.caffeine:caffeine${caffeineVersion}")
+    compile("com.github.ben-manes.caffeine:caffeine:${caffeineVersion}")
 }

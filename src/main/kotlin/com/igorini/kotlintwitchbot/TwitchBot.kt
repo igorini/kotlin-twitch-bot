@@ -2,8 +2,9 @@ package com.igorini.kotlintwitchbot
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
+import com.fasterxml.jackson.module.kotlin.readValue
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import mu.KotlinLogging
-import com.fasterxml.jackson.module.kotlin.*
 import com.github.benmanes.caffeine.cache.Caffeine
 import com.github.benmanes.caffeine.cache.LoadingCache
 import me.philippheuer.twitch4j.TwitchClientBuilder
